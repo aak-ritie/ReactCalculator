@@ -17,6 +17,26 @@ export default function Home() {
     setInput("");
     inputRef.current.focus();
   };
+
+  // const handleSub = (e) => {
+  //   e.preventDefault();
+
+  //   setResult(parseInt(result) - parseInt(input));
+  //   setInput("");
+  //   inputRef.current.focus();
+  // };
+  // const handleMultiply = (e) => {
+  //   e.preventDefault();
+  //   setResult( * parseInt(input));
+  //   setInput("");
+  //   inputRef.current.focus();
+  // };
+  // const handleDivide = (e) => {
+  //   e.preventDefault();
+  //   setResult(parseInt(result) / parseInt(input));
+  //   setInput("");
+  //   inputRef.current.focus();
+  // };
   const handleClearInput = (e) => {
     setInput(0);
     setResult(0);
@@ -38,8 +58,8 @@ export default function Home() {
         <h1>Result: {result}</h1>
         <button onClick={handleAdd}>Add</button>
         <button onClick={handleClearInput}>Clear Input</button>
-        {/* <button onClick={handleSub}>Subtract</button>
-        <button onclick={handleMultiply}>Multiply</button>
+        {/* <button onClick={handleSub}>Subtract</button> */}
+        {/* <button onClick={handleMultiply}>Multiply</button>
         <button onClick={handleDivide}>Divide</button> */}
       </form>
       <div></div>
