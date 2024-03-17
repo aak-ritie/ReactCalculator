@@ -1,72 +1,75 @@
-//creating a simple calculator using react hooks
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
+import "../App.css";
 
-export default function Home() {
-  const [result, setResult] = useState(0);
-  const [input, setInput] = useState(0);
-  const [prevInput, setPrevInput] = useState(0);
-
+function App() {
   const inputRef = useRef(null);
+  const resultRef = useRef(null);
+  const [result, setResult] = useState(0);
 
-  const handleInput = (event) => {
-    setInput(event.target.value);
-  };
-  const handleAdd = (e) => {
+  function plus(e) {
     e.preventDefault();
-    setResult(parseInt(result) + parseInt(input));
+    setResult((result) => result + Number(inputRef.current.value));
+  }
 
-    setInput("");
-    inputRef.current.focus();
-  };
-
-  const handleSub = (e) => {
+  function minus(e) {
     e.preventDefault();
+    if (result === 0) {
+      setResult(() => Number(inputRef.current.value));
+    } else {
+      setResult(() => result - Number(inputRef.current.value));
+    }
+  }
 
-    const newResult = parseInt(input) - parseInt(result);
-    setPrevInput(newResult);
-    setResult(newResult);
-    setInput("");
-    inputRef.current.focus();
-  };
-  // const handleMultiply = (e) => {
-  //   e.preventDefault();
-  //   setResult( * parseInt(input));
-  //   setInput("");
-  //   inputRef.current.focus();
-  // };
-  // const handleDivide = (e) => {
-  //   e.preventDefault();
-  //   setResult(parseInt(result) / parseInt(input));
-  //   setInput("");
-  //   inputRef.current.focus();
-  // };
-  const handleClearInput = (e) => {
-    setInput(0);
+  function times(e) {
+    e.preventDefault();
+    if (result === 0) {
+      setResult(() => Number(inputRef.current.value));
+    } else {
+      setResult((result) => result * Number(inputRef.current.value));
+    }
+  }
+
+  function divide(e) {
+    e.preventDefault();
+    if (result === 0) {
+      setResult(() => Number(inputRef.current.value));
+    } else {
+      setResult((result) => result / Number(inputRef.current.value));
+    }
+  }
+
+  function resetInput(e) {
+    e.preventDefault();
+    inputRef.current.value = "";
+  }
+
+  function resetResult(e) {
+    e.preventDefault();
     setResult(0);
-    inputRef.current.focus();
-  };
+  }
 
   return (
-    <div>
-      <h1>Simple Calculator</h1>
-      <h2>{result}</h2>
+    <div className="App">
+      <div>
+        <h1>Simplest Working Calculator</h1>
+      </div>
       <form>
+        <p ref={resultRef}>Current Total: {result}</p>
         <input
-          type="text"
-          id="input"
-          value={input}
-          onChange={handleInput}
+          pattern="[0-9]"
           ref={inputRef}
-        ></input>
-        <br />
-        <h1>Result: {result}</h1>
-        <button onClick={handleAdd}>Add</button>
-        <button onClick={handleClearInput}>Clear Input</button>
-        <button onClick={handleSub}>Subtract</button>
-        {/* <button onClick={handleMultiply}>Multiply</button>
-        <button onClick={handleDivide}>Divide</button> */}
+          type="number"
+          placeholder="Type a number"
+        />
+        <button onClick={plus}>add</button>
+        <button onClick={minus}>subtract</button>
+        <button onClick={times}>multiply</button>
+        <button onClick={divide}>divide</button>
+        <button onClick={resetInput}>reset input</button>
+        <button onClick={resetResult}>reset result</button>
       </form>
-      <div></div>
     </div>
   );
 }
+
+export default App;
